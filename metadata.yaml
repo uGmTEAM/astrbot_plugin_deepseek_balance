@@ -1,0 +1,8 @@
+name: astrbot_plugin_deepseek_balance
+display_name: DeepSeek 余额监控
+desc: 每日 06:00 / 18:00 自动查询 DeepSeek API 账户余额，当余额低于阈值时向管理群或管理员私聊发送提醒。若未配置 DeepSeek Provider，则不执行。
+short_desc: 定时查询 DeepSeek 账户余额，不足时自动告警。
+author: AstrBot Plugin
+repo: ""
+version: 1.0.0
+astrbot_version: ">=4.5.7"

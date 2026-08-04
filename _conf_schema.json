@@ -1,0 +1,74 @@
+{
+  "enable": {
+    "description": "是否启用 DeepSeek 余额监控",
+    "type": "bool",
+    "default": true,
+    "hint": "关闭后插件不再执行任何定时查询。"
+  },
+  "config_path": {
+    "description": "AstrBot 主配置文件路径",
+    "type": "string",
+    "default": "~/.config/astrbot/config.json",
+    "hint": "AstrBot 存放 providers 的 config.json 路径。Windows 下默认会自动拼接用户目录。"
+  },
+  "provider_keyword": {
+    "description": "识别 DeepSeek Provider 的关键字",
+    "type": "string",
+    "default": "deepseek",
+    "hint": "在 providers 下匹配此关键字（大小写不敏感）的条目即视为 DeepSeek Provider，取其 api_key。"
+  },
+  "threshold": {
+    "description": "告警阈值（美元）",
+    "type": "number",
+    "default": 10.0,
+    "hint": "当可用余额 <= 该阈值时触发告警。"
+  },
+  "check_times": {
+    "description": "每日检查时间（HH:MM 列表，24 小时制）",
+    "type": "list",
+    "default": ["06:00", "18:00"],
+    "hint": "默认每天 06:00 与 18:00 各检查一次。可自行增删。"
+  },
+  "notify_groups": {
+    "description": "告警群聊 ID 列表",
+    "type": "list",
+    "default": [],
+    "hint": "余额不足时向这些群发提醒。填入平台实际群号（如 QQ 群号）。支持多平台，格式 platform_id:group_id，例如 qq:123456789；若仅填数字，默认发给当前平台。"
+  },
+  "notify_users": {
+    "description": "告警管理员私聊 ID 列表",
+    "type": "list",
+    "default": [],
+    "hint": "余额不足时向这些管理员私聊发送提醒。支持格式 platform_id:user_id，例如 qq:10000。"
+  },
+  "alert_on_query": {
+    "description": "每次查询均发送结果（即便余额充足）",
+    "type": "bool",
+    "default": false,
+    "hint": "关闭时仅在不足阈值时通知；开启后每次查询都会通知一次当前余额。"
+  },
+  "cooldown_minutes": {
+    "description": "同一条告警重复发送冷却（分钟）",
+    "type": "int",
+    "default": 30,
+    "hint": "避免同一小时内多次重复告警。默认 30 分钟内同余额异常只告警一次。"
+  },
+  "api_endpoint": {
+    "description": "DeepSeek 余额查询接口",
+    "type": "string",
+    "default": "https://api.deepseek.com/user/balance",
+    "hint": "通常无需修改。"
+  },
+  "request_timeout": {
+    "description": "HTTP 请求超时（秒）",
+    "type": "int",
+    "default": 15,
+    "hint": "查询余额的 HTTP 超时时间。"
+  },
+  "command_permission": {
+    "description": "手动查询指令所需的权限",
+    "type": "string",
+    "default": "admin",
+    "hint": "可用值参考 AstrBot 权限，如 admin / superadmin / owner / everyone。"
+  }
+}

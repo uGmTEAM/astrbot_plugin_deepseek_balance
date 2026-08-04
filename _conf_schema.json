@@ -17,11 +17,17 @@
     "default": "deepseek",
     "hint": "在 providers 下匹配此关键字（大小写不敏感）的条目即视为 DeepSeek Provider，取其 api_key。"
   },
-  "threshold": {
-    "description": "告警阈值（美元）",
+  "threshold_cny": {
+    "description": "告警阈值（人民币 CNY）",
     "type": "float",
-    "default": 10.0,
-    "hint": "当可用余额 <= 该阈值时触发告警。"
+    "default": 70.0,
+    "hint": "当换算后的人民币余额 ≤ 该阈值时触发告警。默认 70.00 元。"
+  },
+  "usd_to_cny_rate": {
+    "description": "美元兑人民币汇率",
+    "type": "float",
+    "default": 7.2,
+    "hint": "用于将 API 返回的美元余额换算为人民币。可按实际汇率调整。"
   },
   "check_times": {
     "description": "每日检查时间（HH:MM 列表，24 小时制）",
@@ -70,5 +76,24 @@
     "type": "string",
     "default": "admin",
     "hint": "可用值参考 AstrBot 权限，如 admin / superadmin / owner / everyone。"
+  },
+  "use_persona": {
+    "description": "告警文案使用 LLM 当前人格生成",
+    "type": "bool",
+    "default": true,
+    "hint": "开启后，低余额告警文案会调用 LLM 以 AstrBot 当前人设的语气生成（消耗少量 token）。关闭则使用固定模板。"
+  },
+  "persona_provider_id": {
+    "description": "用于生成人格告警文案的模型提供商 ID",
+    "type": "string",
+    "default": "",
+    "_special": "select_provider",
+    "hint": "留空则使用当前会话配置的默认模型。建议选用响应快、成本低的模型。"
+  },
+  "depleted_message": {
+    "description": "LLM 因余额不足无法使用时的告警文案",
+    "type": "text",
+    "default": "API余额已经用完，请管理者及时充值。",
+    "hint": "当插件检测到 LLM 调用因余额耗尽（如 402/Insufficient Quota）而失败时，向管理员发送该文案。支持 {provider} 占位符。"
   }
 }

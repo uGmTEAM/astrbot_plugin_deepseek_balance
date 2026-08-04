@@ -19,7 +19,7 @@
   },
   "threshold": {
     "description": "告警阈值（美元）",
-    "type": "number",
+    "type": "float",
     "default": 10.0,
     "hint": "当可用余额 <= 该阈值时触发告警。"
   },
